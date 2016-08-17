@@ -35,7 +35,7 @@ for user in users:
 # and then populate the lists with friendships
 for i, j in friendships:
     # this works because users[i] is the user whose id is i
-    users[i]["friends"].append(users[j]) # add i as a friend of j
+    users[i]["friends"].append(users[j]) # add i as a friend of j 수정을 테스트 한다
     users[j]["friends"].append(users[i]) # add j as a friend of i
 
 def number_of_friends(user):
