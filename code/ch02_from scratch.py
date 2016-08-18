@@ -97,6 +97,7 @@ copy_of_x = x[:]
 # [3, 4, ..., 9] # [1, 2, 3, 4] # [7, 8, 9]
 # [1, 2, ..., 8] # [-1, 1, 2, ..., 9]
 
+# List의 조작
 x = [1, 2, 3]
 x.extend([4, 5, 6])
 print(x)
@@ -139,11 +140,28 @@ x, y = y, x     # 가장 파이썬스러운 변수 값 교환
 
 # Dict를 알아 보자
 # key, value 구조를 만들수 있다
-
 empty_dict = {}         # 가장 파이썬 스럽게 Dict를 만드는 법
 empty_dict2 = dict()    # less Pythonic
 grades = {  "Joel"  : 80,
             "Tim"   : 95 }    # 이것이 Dict다
 print(grades)
 
- # dictionary litera
+j_grade = grades["Joel"] # equals 80  , 키로 value를 호출
+print(j_grade)
+
+kates_grade = grades["Kate"]  # except KeyError: print "no grade for Kate!"
+
+# 연산자 in으로 키값있는지 확인
+joel_has_grade = "Joel" in grades   # 키 값 in Dict 이 있는지 TRUE, FALSE 반환
+kate_has_grade = "Kate" in grades   # Kate는 값이 없다.
+print (joel_has_grade)
+print (kate_has_grade)
+
+# .get함수는 해당 키를 못찾으면 기본값(0)을 반환해 준다
+joels_grade = grades.get("Joel", 0) # equals 80
+kates_grade = grades.get("Kate", 0) # equals , 이름이 없으니 대신 0을 반환
+no_ones_grade = grades.get("No One") # 기본값으로 None 반환
+print (joels_grade )
+print (kates_grade )
+print (no_ones_grade )
+
