@@ -40,4 +40,4 @@ tab_string = "\t" # represents the tab character
 print(len(tab_string)) # is 1 , 문자길이는 한자
 print("C"+tab_string+"C")   # 거리는 4칸이지만
 
-
+hshiosaoihsioahfsaiohsfaiohasfio
