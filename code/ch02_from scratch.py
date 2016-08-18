@@ -29,15 +29,18 @@ my_print("dododo")
 
 def subtract(a=0, b=0):
     return a - b
-print (subtract(10, 5)) # returns 5
-print (subtract(0, 5)) # returns -5
-print (subtract(b=5)) # same as previous
+print(subtract(10, 5))  # returns 5
+print(subtract(0, 5))   # returns -5
+print(subtract(b=5))    # same as previous
 
 single_quoted_string = 'data science'
 double_quoted_string = "data science"
 
-tab_string = "\t" # represents the tab character
-print(len(tab_string)) # is 1 , 문자길이는 한자
+tab_string = "\t"   # represents the tab character
+print(len(tab_string))      # is 1 , 문자길이는 한자
 print("C"+tab_string+"C")   # 거리는 4칸이지만
 
-hshiosaoihsioahfsaiohsfaiohasfio
+not_tab_string = r"\t" # represents the characters '\' and 't'
+len(not_tab_string) # is 2   '\t'
+print(not_tab_string)
+
