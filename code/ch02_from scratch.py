@@ -35,9 +35,11 @@ print(subtract(10, 5))  # returns 5
 print(subtract(0, 5))   # returns -5
 print(subtract(b=5))    # same as previous
 
+# 따옴표
 single_quoted_string = 'data science'
 double_quoted_string = "data science"
 
+# 특수문자 처리
 tab_string = "\t"   # represents the tab character
 print(len(tab_string))      # is 1 , 문자길이는 한자
 print("C"+tab_string+"C")   # 거리는 4칸이지만
@@ -74,6 +76,7 @@ eight = x[-2]   # equals 8, 'Pythonic' for next-to-last element #
 x[0] = -1       # now x is [-1, 1, 2, 3, ..., 9]
 print(x)
 
+# List의 참조
 first_three = x[:3]
 print(first_three)
 
@@ -115,6 +118,32 @@ print(z)
 
 # 튜플은 그 값을 바꿀수 없다
 my_list = [1, 2]
-my_tuple = (1, 2) other_tuple = 3, 4 my_list[1] = 3
-# my_list is now [1, 3] try: my_tuple[1] = 3
-except TypeError: print "cannot modify a tuple"
+my_tuple = (1, 2)
+other_tuple = 3, 4
+my_list[1] = 3
+
+# my_list is now [1, 3] try:
+my_tuple[1] = 3 #  except TypeError: print "cannot modify a tuple"
+
+# 함수가 여러개의 값을 같이 반환
+def sum_and_product(x, y):
+    return (x + y),(x * y)
+sp = sum_and_product(2, 3)      # equals (5, 6)
+print(sp)                      # 하나의 변수에 두개의 값
+
+s, p = sum_and_product(5, 10)   # s is 15, p is 50, 이렇게 두변수에 동시에 입력도 가능하다
+print(s,p)
+
+x, y = 1, 2     # now x is 1, y is 2
+x, y = y, x     # 가장 파이썬스러운 변수 값 교환
+
+# Dict를 알아 보자
+# key, value 구조를 만들수 있다
+
+empty_dict = {}         # 가장 파이썬 스럽게 Dict를 만드는 법
+empty_dict2 = dict()    # less Pythonic
+grades = {  "Joel"  : 80,
+            "Tim"   : 95 }    # 이것이 Dict다
+print(grades)
+
+ # dictionary litera
