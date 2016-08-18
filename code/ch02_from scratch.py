@@ -44,3 +44,27 @@ not_tab_string = r"\t" # represents the characters '\' and 't'
 len(not_tab_string) # is 2   '\t'
 print(not_tab_string)
 
+multi_line_string = """This is the first line.
+and this is the second line
+and this is the third line"""
+# 따옴표 세개로 여러줄 주석 가능
+
+print (0 / 0)   # ZeroDivisionError: division by zero
+
+
+integer_list = [1, 2, 3]
+heterogeneous_list = ["string", 0.1, True]      # 이질적 자료 모음
+
+list_of_lists = [ integer_list, heterogeneous_list, [] ]
+print(list_of_lists)                    # 이렇게 표시됨 [[1, 2, 3], ['string', 0.1, True], []]
+print(len(list_of_lists))               # 결과는 3, 첫번째 껍데기 안의 갯수를 보여줌
+
+list_length = len(integer_list)         # 결과는 3
+list_sum = sum(integer_list)            # 결과는 6
+
+x = range(10) # is the list [0, 1, ..., 9] zero = x[0] one = x[1]
+nine = x[-1]
+# equals 0, lists are 0-indexed # equals 1
+# equals 9, 'Pythonic' for last element
+eight = x[-2] # equals 8, 'Pythonic' for next-to-last element x[0] = -1
+# now x is [-1, 1, 2, 3, ..., 9]
