@@ -165,4 +165,26 @@ print (joels_grade )
 print (kates_grade )
 print (no_ones_grade )
 
-#
+# 키로 벨류 부르기
+grades["Tim"] = 99             # replaces the old value
+grades["Kate"] = 100           # adds a third entry
+num_students = len(grades)      # equals 3
+print(grades)                   # 세쌍의 키 벨류가 있어서..
+
+# 정형화된 문자열을 표현할 때
+tweet = { "user" : "joelgrus",
+          "text" : "Data Science is Awesome",
+          "retweet_count" : 100,
+          "hashtags" : ["#data", "#science", "#datascience", "#awesome", "#yolo"]
+}
+print (tweet)
+
+
+
+tweet_keys = tweet.keys()
+# list of keys
+tweet_values = tweet.values() # list of values tweet_items = tweet.items()
+"user" in tweet_keys "user" in tweet
+"joelgrus" in tweet_values # list of (key, value) tuples
+# True, but uses a slow list in # more Pythonic, uses faster dict in
+# True
