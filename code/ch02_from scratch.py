@@ -420,3 +420,5 @@ print(zeroes)
 pairs = [(x, y) for x in range(10) for y in range(10)]
 pairs
 
+increasing_pairs = [(x, y) for x in range(10)
+
