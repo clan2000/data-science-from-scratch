@@ -13234,6 +13234,11 @@
         <option name="FOREGROUND" value="dad085" />
       </value>
     </option>
+    <option name="PY.SELF_PARAMETER">
+      <value>
+        <option name="FOREGROUND" value="ad63a5" />
+      </value>
+    </option>
     <option name="PY.STRING">
       <value>
         <option name="FOREGROUND" value="8f9d6a" />
