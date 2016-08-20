@@ -1,4 +1,5 @@
 # 함수 기초
+# <editor-fold desc="함수 기초">
 def double(x):
     return x * 2
 
@@ -10,8 +11,10 @@ def apply_to_one(f):         # 인자로 들어온 함수 f에 1을 넣는 함�
 my_double = double              # 함수에 함수를 대입할수 있다
 x = apply_to_one(my_double)     # 함수를 인자로 하여 다른 함수에 대입할수 있다.
 print(x)
+# </editor-fold>
 
 # 람다 함수
+# <editor-fold desc="짧은 익명 람다 함수">
 y = apply_to_one(lambda x: x+4)     # 5  짧은 익명 람다 함수
 print(y)                            #
 
@@ -20,8 +23,10 @@ print(another_double(4))
 
 another_double = lambda x: 2 * x        # don't do this
 def another_double(x): return 2 * x     # do this instead
+# </editor-fold>
 
 # 함수의 Default 값
+# <editor-fold desc="message="my default message"">
 def my_print(message="my default message"):  # message 인자의 Default 값으로 my default message를 사용
     print (message)
 
@@ -35,12 +40,16 @@ def subtract(a=0, b=0):
 print(subtract(10, 5))  # returns 5
 print(subtract(0, 5))   # returns -5
 print(subtract(b=5))    # same as previous
+# </editor-fold>
 
 # 따옴표
+# <editor-fold desc="따옴표">
 single_quoted_string = 'data science'
 double_quoted_string = "data science"
+# </editor-fold>
 
 # 특수문자 처리
+# <editor-fold desc="\사용법 r사용법">
 tab_string = "\t"   # represents the tab character
 print(len(tab_string))      # is 1 , 문자길이는 한자
 print("C"+tab_string+"C")   # 거리는 4칸이지만
@@ -48,15 +57,22 @@ print("C"+tab_string+"C")   # 거리는 4칸이지만
 not_tab_string = r"\t" # represents the characters '\' and 't'
 len(not_tab_string) # is 2   '\t'
 print(not_tab_string)
+# </editor-fold>
 
 # 따옴표 세개로 여러줄 주석 가능
+# <editor-fold desc="주석">
 multi_line_string = """This is the first line.
 and this is the second line
 and this is the third line"""
+# </editor-fold>
 
-print (0 / 0)   # ZeroDivisionError: division by zero
+# division by zero
+# <editor-fold desc="division by zero">
+print (0 / 0)
+# </editor-fold>
 
 # List의 구조 살펴보기
+# <editor-fold desc="List의 구조 길이 합계">
 integer_list = [1, 2, 3]
 heterogeneous_list = ["string", 0.1, True]      # 이질적 자료 모음
 
@@ -66,8 +82,10 @@ print(len(list_of_lists))               # 결과는 3, 첫번째 껍데기 안�
 
 list_length = len(integer_list)         # 결과는 3
 list_sum = sum(integer_list)            # 결과는 6
+# </editor-fold>
 
 # List의 인자 살펴 보기
+# <editor-fold desc="List의 인자 지정">
 x = range(10) # is the list [0, 1, ..., 9]
 print (x)
 zero = x[0]
@@ -76,11 +94,12 @@ nine = x[-1]    # equals 9, 'Pythonic' for last element
 eight = x[-2]   # equals 8, 'Pythonic' for next-to-last element #
 x[0] = -1       # now x is [-1, 1, 2, 3, ..., 9]
 print(x)
+# </editor-fold>
 
-# List의 참조
+# List 의 참조
+# <editor-fold desc="List의 참조">
 first_three = x[:3]
 print(first_three)
-
 
 three_to_end = x[3:]
 one_to_four = x[1:5]
@@ -90,15 +109,15 @@ print(three_to_end)
 without_first_and_last = x[1:-1]
 print(without_first_and_last)
 copy_of_x = x[:]
+# </editor-fold>
 
+# List 와 in
+# <editor-fold desc="List 와 in">
+0 in [1, 2, 3]  # False
+# </editor-fold>
 
-0 in [1, 2, 3]
-# True # False
-# [-1, 1, 2]
-# [3, 4, ..., 9] # [1, 2, 3, 4] # [7, 8, 9]
-# [1, 2, ..., 8] # [-1, 1, 2, ..., 9]
-
-# List의 조작
+# List 의 조작
+# <editor-fold desc="List에 추가 ">
 x = [1, 2, 3]
 x.extend([4, 5, 6])
 print(x)
@@ -116,18 +135,22 @@ print(y)
 
 z = len(x)
 print(z)
+# </editor-fold>
 
 
 # 튜플은 그 값을 바꿀수 없다
+# <editor-fold desc="튜플은 변경 불가">
 my_list = [1, 2]
 my_tuple = (1, 2)
 other_tuple = 3, 4
 my_list[1] = 3
 
 # my_list is now [1, 3] try:
-my_tuple[1] = 3 #  except TypeError: print "cannot modify a tuple"
+my_tuple[1] = 3 #  except TypeError:  print "cannot modify a tuple"
+# </editor-fold>
 
 # 함수가 여러개의 값을 같이 반환
+# <editor-fold desc="파이썬 스러운 변수 반환">
 def sum_and_product(x, y):
     return (x + y),(x * y)
 sp = sum_and_product(2, 3)      # equals (5, 6)
@@ -138,9 +161,10 @@ print(s,p)
 
 x, y = 1, 2     # now x is 1, y is 2
 x, y = y, x     # 가장 파이썬스러운 변수 값 교환
+# </editor-fold>
 
 # Dict를 알아 보자
-# key, value 구조를 만들수 있다
+# <editor-fold desc="key, value 구조를 만들수 있다">
 empty_dict = {}         # 가장 파이썬 스럽게 Dict를 만드는 법
 empty_dict2 = dict()    # less Pythonic
 grades = {  "Joel"  : 80,
@@ -151,35 +175,45 @@ j_grade = grades["Joel"] # equals 80  , 키로 value를 호출
 print(j_grade)
 
 kates_grade = grades["Kate"]  # except KeyError: print "no grade for Kate!"
+# </editor-fold>
 
-# 연산자 in으로 키값있는지 확인
+# 연산자 in 으로 키값있는지 확인
+# <editor-fold desc="in 연산자">
 joel_has_grade = "Joel" in grades   # 키 값 in Dict 이 있는지 TRUE, FALSE 반환
 kate_has_grade = "Kate" in grades   # Kate는 값이 없다.
 print (joel_has_grade)
 print (kate_has_grade)
+# </editor-fold>
 
 # .get함수는 해당 키를 못찾으면 기본값(0)을 반환해 준다
+# <editor-fold desc="get 함수 사용법">
 joels_grade = grades.get("Joel", 0) # equals 80
 kates_grade = grades.get("Kate", 0) # equals , 이름이 없으니 대신 0을 반환
 no_ones_grade = grades.get("No One") # 기본값으로 None 반환
 print (joels_grade )
 print (kates_grade )
 print (no_ones_grade )
+# </editor-fold>
 
 # 키로 벨류 부르기
+# <editor-fold desc="Key로 호출">
 grades["Tim"] = 99             # replaces the old value
 grades["Kate"] = 100           # adds a third entry
 num_students = len(grades)      # equals 3
 print(grades)                   # 세쌍의 키 벨류가 있어서..
+# </editor-fold>
 
 # 정형화된 문자열을 표현할 때
+# <editor-fold desc="Description">
 tweet = { "user" : "joelgrus",
           "text" : "Data Science is Awesome",
           "retweet_count" : 100,
           "hashtags" : ["#data", "#science", "#datascience", "#awesome", "#yolo"]
 }
+# </editor-fold>
 
-# key,value, item
+# key,value, item 함수 사용법
+# <editor-fold desc="Description">
 print (tweet)                   # {키:값, 키:값,,,}
 
 tweet_keys = tweet.keys()       # list of keys  키 부분만 출력
@@ -197,9 +231,10 @@ print ("user" in tweet_keys)    # tweet_keys는 dict가 아닌 List인데 그래
 print("user" in tweet)          # dict에서 in을 사용했기 때문에 빠름. 파이썬 스럽다
 
 "joelgrus" in tweet_values      # list of (key, value) tuples
+# </editor-fold>
 
 # defaultdict
-
+# <editor-fold desc="defaultdict을 쓰지 않고">
 # 1. 가장 기초적인 방법
 word_counts = {}
 for word in document:
@@ -224,7 +259,12 @@ for word in document:
     previous_count = word_counts.get(word, 0)
     word_counts[word] = previous_count + 1
 
+# </editor-fold>
+
+
+
 # defaultdict 활용하는 방법
+
 from collections import defaultdict
 word_counts = defaultdict(int)  # int() produces 0 , Defaultdict 형태의 함수로 만든다
 for word in document:
@@ -420,5 +460,11 @@ print(zeroes)
 pairs = [(x, y) for x in range(10) for y in range(10)]
 pairs
 
-increasing_pairs = [(x, y) for x in range(10)
+increasing_pairs = [(x, y)
+                    for x in range(10)
+                    for y in range(x + 1, 10)]  # Y 는 x보다 1 크게 시작
+increasing_pairs
+
+# Generators and Iterators
+
 
