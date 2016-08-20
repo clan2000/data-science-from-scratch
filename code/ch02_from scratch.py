@@ -255,7 +255,6 @@ dd_pair[2][1] = 1               # 이부분은 알수 없다
 print(dd_pair)                  # defaultdict(<function <lambda> at 0x105acc510>, {2: [0, 1]})
 
 # Counter
-
 from collections import Counter # key에 빈도값을 연결하여 히스토그램등에 쓰임
 c = Counter([0, 1, 2, 0]) # c is (basically) { 0 : 2, 1 : 1, 2 : 1 }
 print(c)
@@ -269,3 +268,108 @@ print(word_counts)  #
 from collections import Counter
 for word, count in word_counts.most_common(10):     # most_common(10)
     print (word, count)
+
+# Sets
+s = set()
+s.add(1)
+s.add(2)
+s.add(2)    # 이미 앞에서 2를 넣었기 때문에 집합개념인 s는 원소 갯수는 변하지 않는다
+print(s)
+
+x = len(s)  # 2
+print(x)
+
+y = 2 in s
+print(y)    # TRUE
+
+z = 3 in s
+print(z)    # FALSE
+
+# List보다 Set에서 in으로 원소를 찾는 것이 훨씬 빠르다
+stopwords_list = ["a","an","at"] + hundreds_of_other_words + ["yet", "you"]
+"zip" in stopwords_list # False, but have to check every element
+
+stopwords_set = set(stopwords_list)
+"zip" in stopwords_set  # very fast to check
+
+# set과 list의 차이점 set은 중복 제거용으로 쓸 수 있다
+item_list = [1, 2, 3, 1, 2, 3]
+num_items = len(item_list)              # 6
+item_set = set(item_list)               # 집함이므로 원소는 3개
+num_distinct_items = len(item_set)      # 3
+distinct_item_list = list(item_set)     # 중복된 원소가 제거되어 [1,2,3]만 남는다
+
+# 흐름 제어
+if 1 > 2 :
+    message = "if only 1 were greater than two..."
+elif 1 > 3:
+    message = "elif stands for 'else if'"
+else:
+    message = "when all else fails use else (if you want to)"
+print(message) # when all else fails use else (if you want to)
+
+
+# if else는 한줄로도 표현 가능
+parity = "even" if x % 2 == 0 else "odd "
+print(parity)
+
+# 파이썬도 while이 있지만
+x = 0
+while x < 10:
+    print (x,"is less than 10")
+    x += 1
+
+# 대부분은 for in 을 쓴다
+for x in range(10):  # 10칸을 만들지만 0~9 이다. 즉 10은 만들지 않는다
+    print (x, "is less than 10")
+
+# 복잡한 로직이 필요한 경우 continue 나 break를 사용할수 있다
+for x in range(10):
+    if x == 3:
+        continue    # 여기서 점프하여 for 시작으로 돌아 간다
+    if x == 5:
+        break       # 루프를 멈추므로 6부터는 보이지 않는다
+    print(x)        # This will print 0, 1, 2, and 4.
+
+
+# 불리언 연산자
+
+one_is_less_than_two = 1 < 2 # equals True
+true_equals_false = True == False # T가 F와 같다면 Ture
+
+x = None        # 파이썬은  null을 None으로 표기
+print x == None # prints True, 파이썬스럽지 않다
+print x is None # prints True, 파이썬스럽다
+
+# 아래 값은 모두 False다
+False
+None
+[]          # (an empty list), list는 1차원
+{}          # (an empty dict), dict은 key-value
+""
+set()
+0
+0.0
+
+# 첫문자가 비어 있지않으면 그 문자를 출력
+s = "some_function_that_returns_a_string()"
+if s:
+    first_char = s[0]
+else:
+    first_char = ""
+print(first_char)
+
+# 첫번째 값이 참이면 두번째인 s[0]을 첫번째가 거짓이면 첫번째를 돌려준다
+s =""
+first_char = s and s[0]
+print(first_char)       # 거짓이므로 첫번째 값인 ""을 돌려줌
+
+x = 37
+safe_x = x or 1     # 37 or 1 = 37
+print(safe_x)
+
+print(all([True, 1, { 3 }]))        # T 모두 참이냐 ?
+print(all([True, 1, {}]))           # F, {}는 비어 있어서 거짓
+print(any([True, 1, {}]))           # T 하나라도 참이냐?
+print(all([]))                      # 이것이 왜 참임?
+print(any([]))                      # F
