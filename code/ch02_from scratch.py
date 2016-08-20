@@ -56,7 +56,7 @@ and this is the third line"""
 
 print (0 / 0)   # ZeroDivisionError: division by zero
 
-# Lsit의 구조 살펴보기
+# List의 구조 살펴보기
 integer_list = [1, 2, 3]
 heterogeneous_list = ["string", 0.1, True]      # 이질적 자료 모음
 
@@ -371,3 +371,52 @@ print(all([True, 1, {}]))           # F, {}는 비어 있어서 거짓
 print(any([True, 1, {}]))           # T 하나라도 참이냐?
 print(all([]))                      # 이것이 왜 참임?
 print(any([]))                      # F
+
+
+''' Part 2 Not So Basic'''
+
+x = [4,1,2,3]
+y = sorted(x)           # is [1,2,3,4], x is unchanged
+print(y)
+x.sort()                # # now x is [1,2,3,4] .sort()로 순서를 바꾼다
+
+# sort the list by absolute value from largest to smallest
+# []는 리스트 {}는 Dict
+# sort(리스트, key = abs, reverse = True)
+x = sorted([-4,1,-2,3], key=abs, reverse=True) # is [-4,3,-2,1]
+print(x)
+
+# 가장 많이 나온 문자부터 표시
+word_counts = Counter(document)
+print(word_counts)
+word_counts.items()
+
+# 왜 안되는지 알수 없음 ㅠㅠ
+wcc = sorted(word_counts.items(),               # (워드,카운트) 형태로 뽑아냄
+            key = lambda (word, count): count,  # 카운트만 남기고 벗겨냄
+            reverse = True)
+
+# List Comprehensions : List 로 변환
+even_numbers = [x for x in range(5) if x % 2 == 0]  # [0, 2, 4] #
+print(even_numbers)
+
+squares = [x * x for x in range(5)]                 # [0, 1, 4, 9, 16]
+print(squares)
+
+even_squares = [x * x for x in even_numbers]        # [0, 4, 16]
+print(even_squares)
+
+# dict로 변환
+square_dict = { x : x * x for x in range(5) }       # { 0:0, 1:1, 2:4, 3:9, 4:16 }
+
+# set으로 변환
+square_set = { x * x for x in [1, -1] }             # { 1 }  제곱한 것은 동일하게 1 이므로
+
+# 불필요한 값은 _로 표시
+zeroes = [0 for _ in even_numbers] # even_numbers 와 동일한 길이
+print(zeroes)
+
+# (0,0) 부터 (9,9)까지
+pairs = [(x, y) for x in range(10) for y in range(10)]
+pairs
+
