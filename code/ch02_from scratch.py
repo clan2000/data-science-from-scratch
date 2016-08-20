@@ -1,4 +1,3 @@
-
 # 함수 기초
 def double(x):
     return x * 2
@@ -13,7 +12,6 @@ x = apply_to_one(my_double)     # 함수를 인자로 하여 다른 함수에 �
 print(x)
 
 # 람다 함수
-
 y = apply_to_one(lambda x: x+4)     # 5  짧은 익명 람다 함수
 print(y)                            #
 
@@ -266,8 +264,9 @@ print(word_counts)  #
 
 # print the 10 most common words and their counts
 from collections import Counter
+print (word, count)
 for word, count in word_counts.most_common(10):     # most_common(10)
-    print (word, count)
+    pass
 
 # Sets
 s = set()
@@ -308,7 +307,6 @@ else:
     message = "when all else fails use else (if you want to)"
 print(message) # when all else fails use else (if you want to)
 
-
 # if else는 한줄로도 표현 가능
 parity = "even" if x % 2 == 0 else "odd "
 print(parity)
@@ -331,9 +329,7 @@ for x in range(10):
         break       # 루프를 멈추므로 6부터는 보이지 않는다
     print(x)        # This will print 0, 1, 2, and 4.
 
-
 # 불리언 연산자
-
 one_is_less_than_two = 1 < 2 # equals True
 true_equals_false = True == False # T가 F와 같다면 Ture
 
@@ -351,6 +347,7 @@ set()
 0
 0.0
 
+# True와 False
 # 첫문자가 비어 있지않으면 그 문자를 출력
 s = "some_function_that_returns_a_string()"
 if s:
@@ -358,6 +355,7 @@ if s:
 else:
     first_char = ""
 print(first_char)
+
 
 # 첫번째 값이 참이면 두번째인 s[0]을 첫번째가 거짓이면 첫번째를 돌려준다
 s =""
