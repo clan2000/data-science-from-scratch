@@ -13,6 +13,7 @@ x = apply_to_one(my_double)     # 함수를 인자로 하여 다른 함수에 �
 print(x)
 
 # 람다 함수
+
 y = apply_to_one(lambda x: x+4)  # 5  짧은 익명 람다 함수
 another_double = lambda x: 2 * x
 print(y)
@@ -48,10 +49,10 @@ not_tab_string = r"\t" # represents the characters '\' and 't'
 len(not_tab_string) # is 2   '\t'
 print(not_tab_string)
 
+# 따옴표 세개로 여러줄 주석 가능
 multi_line_string = """This is the first line.
 and this is the second line
 and this is the third line"""
-# 따옴표 세개로 여러줄 주석 가능
 
 print (0 / 0)   # ZeroDivisionError: division by zero
 
@@ -177,14 +178,43 @@ tweet = { "user" : "joelgrus",
           "retweet_count" : 100,
           "hashtags" : ["#data", "#science", "#datascience", "#awesome", "#yolo"]
 }
-print (tweet)
+
+# key,value, item
+print (tweet)                   # {키:값, 키:값,,,}
+
+tweet_keys = tweet.keys()       # list of keys  키 부분만 출력
+print (tweet_keys)
 
 
+tweet_values = tweet.values()   # list of values 값 부분만 출력
+print(tweet_values)
 
-tweet_keys = tweet.keys()
-# list of keys
-tweet_values = tweet.values() # list of values tweet_items = tweet.items()
-"user" in tweet_keys "user" in tweet
-"joelgrus" in tweet_values # list of (key, value) tuples
-# True, but uses a slow list in # more Pythonic, uses faster dict in
-# True
+tweet_items = tweet.items()     # item  출력 [(키,값), (키,값..]
+print(tweet_items)
+
+print ("user" in tweet_keys)    # tweet_keys는 dict가 아닌 List인데 그래서 in 사용시 느림
+
+print("user" in tweet)          # dict에서 in을 사용했기 때문에 빠름. 파이썬 스럽다
+
+"joelgrus" in tweet_values      # list of (key, value) tuples
+
+# defaultdict
+
+# 1. 가장 기초적인 방법
+
+word_counts = {}
+for word in document:
+    if word in word_counts:         # 해당 단어가 있으먄
+        word_counts[word] += 1      # 그 단어 value에 1을 더한다
+    else:
+        word_counts[word] = 1       # 없으면 1로 value를 지정
+
+# 2. 에러를 활용한 방법
+document = "This is a first sentence for Python self study"
+word_counts = {}
+for word in document:
+    try:
+        word_counts[word] += 1
+    except KeyError:
+        word_counts[word] = 1
+print(word_counts)
