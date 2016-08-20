@@ -14,9 +14,11 @@ print(x)
 
 # 람다 함수
 
-y = apply_to_one(lambda x: x+4)  # 5  짧은 익명 람다 함수
+y = apply_to_one(lambda x: x+4)     # 5  짧은 익명 람다 함수
+print(y)                            #
+
 another_double = lambda x: 2 * x
-print(y)
+print(another_double(4))
 
 another_double = lambda x: 2 * x        # don't do this
 def another_double(x): return 2 * x     # do this instead
@@ -201,7 +203,6 @@ print("user" in tweet)          # dict에서 in을 사용했기 때문에 빠름
 # defaultdict
 
 # 1. 가장 기초적인 방법
-
 word_counts = {}
 for word in document:
     if word in word_counts:         # 해당 단어가 있으먄
@@ -210,7 +211,7 @@ for word in document:
         word_counts[word] = 1       # 없으면 1로 value를 지정
 
 # 2. 에러를 활용한 방법
-document = "This is a first sentence for Python self study"
+# document = "This is a first sentence for Python self study"
 word_counts = {}
 for word in document:
     try:
@@ -218,3 +219,53 @@ for word in document:
     except KeyError:
         word_counts[word] = 1
 print(word_counts)
+
+# 좀더 고급스러운 방법
+word_counts = {}
+for word in document:
+    previous_count = word_counts.get(word, 0)
+    word_counts[word] = previous_count + 1
+
+# defaultdict 활용하는 방법
+from collections import defaultdict
+word_counts = defaultdict(int)  # int() produces 0 , Defaultdict 형태의 함수로 만든다
+for word in document:
+    word_counts[word] += 1      # 해당 word가 없으면 0이므로 1로 채운다
+
+
+# case #1
+from collections import defaultdict
+dd_list = defaultdict(list)     # 빈 list를 생성
+dd_list[2].append(1)            # 세번째 자리에 1을 채운다
+dd_list[0].append(9)            # 0째 자리에 9를 채운다
+print(dd_list)
+len(dd_list)
+
+# case #2
+from collections import defaultdict
+dd_dict = defaultdict(dict)
+dd_dict["Joel"]["City"] = "Seattle"
+len(dd_dict)
+print(dd_dict)                  # defaultdict(<class 'dict'>, {'Joel': {'City': 'Seattle'}})
+
+# case #3
+from collections import defaultdict
+dd_pair = defaultdict(lambda: [0, 0])
+dd_pair[2][1] = 1               # 이부분은 알수 없다
+print(dd_pair)                  # defaultdict(<function <lambda> at 0x105acc510>, {2: [0, 1]})
+
+# Counter
+
+from collections import Counter # key에 빈도값을 연결하여 히스토그램등에 쓰임
+c = Counter([0, 1, 2, 0]) # c is (basically) { 0 : 2, 1 : 1, 2 : 1 }
+print(c)
+
+# 이것 한줄로 단어 카운트 해결
+word_counts = Counter(document)
+print(document)     # This is a first sentence for Python self study
+print(word_counts)  #
+
+# print the 10 most common words and their counts
+from collections import Counter
+for word, count in word_counts.most_common(10):     # most_common(10)
+    print (word, count)
