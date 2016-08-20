@@ -457,6 +457,7 @@ zeroes = [0 for _ in even_numbers] # even_numbers 와 동일한 길이
 print(zeroes)
 
 # (0,0) 부터 (9,9)까지
+# <editor-fold desc="range 쓰는 법">
 pairs = [(x, y) for x in range(10) for y in range(10)]
 pairs
 
@@ -464,7 +465,51 @@ increasing_pairs = [(x, y)
                     for x in range(10)
                     for y in range(x + 1, 10)]  # Y 는 x보다 1 크게 시작
 increasing_pairs
+# </editor-fold>
 
 # Generators and Iterators
+# <editor-fold desc="무슨 뜻인지 명확하지 않음">
+def lazy_range(n):
+    """a lazy version of range"""
+    i = 0
+    while i < n:
+        yield i
+        i += 1
 
+for i in lazy_range(10):
+    do_something_with(i)
 
+def natural_numbers():
+    """returns 1, 2, 3, ..."""
+    n = 1
+    while True:
+        yield n
+        n += 1
+        print(n)
+
+lazy_evens_below_20 = (i for i in lazy_range(20) if i % 2 == 0)
+print(lazy_evens_below_20)
+
+# </editor-fold>
+
+# 난수의 생성
+import random
+four_uniform_randoms = [random.random() for _ in range(4)]
+four_uniform_randoms        # 난수 4개의 List를 보여줌
+
+random.seed(10)             # seed 를 고정
+print (random.random())     # 0.57140259469
+
+random.seed(10)             # seed 를 고정
+print (random.random())     # 0.57140259469 again
+
+random.seed(11)             # seed 를 변경
+print (random.random())     # 0.4523795535098186
+
+print(random.randrange(10))        # 정수로 영역 지정, 끝점은 제외 range(10) = [0, 1, ..., 9]
+print(random.randrange(3, 6))      # 정수로 영역 지정, 끝점은 제외 range(3, 6) = [3, 4, 5]
+
+up_to_ten = range[10]
+reorder = random.shuffle(up_to_ten)   # shuffle은 리스트의 순서를 임의로 바꾸어 준다.
+print (reorder)
+# [2, 5, 1, 9, 7, 3, 8, 6, 4, 0] (your results will probably be different)
