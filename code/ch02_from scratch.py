@@ -265,6 +265,7 @@ for word in document:
 
 # defaultdict 활용하는 방법
 
+# <editor-fold desc="해당 키값이 없는 경우 만들어 준다">
 from collections import defaultdict
 word_counts = defaultdict(int)  # int() produces 0 , Defaultdict 형태의 함수로 만든다
 for word in document:
@@ -291,29 +292,38 @@ from collections import defaultdict
 dd_pair = defaultdict(lambda: [0, 0])
 dd_pair[2][1] = 1               # 이부분은 알수 없다
 print(dd_pair)                  # defaultdict(<function <lambda> at 0x105acc510>, {2: [0, 1]})
+# </editor-fold>
 
 # Counter
+# <editor-fold desc="히스토그램에 쓰임">
 from collections import Counter # key에 빈도값을 연결하여 히스토그램등에 쓰임
 c = Counter([0, 1, 2, 0]) # c is (basically) { 0 : 2, 1 : 1, 2 : 1 }
 print(c)
+# </editor-fold>
 
 # 이것 한줄로 단어 카운트 해결
+# <editor-fold desc="단어 세기">
+document = "This is a first sentence for Python self study"
 word_counts = Counter(document)
 print(document)     # This is a first sentence for Python self study
-print(word_counts)  #
+print(word_counts)
+# </editor-fold>
 
 # print the 10 most common words and their counts
+word = "wolf fox bear cat dogs eagle"
 from collections import Counter
 print (word, count)
 for word, count in word_counts.most_common(10):     # most_common(10)
     pass
 
-# Sets
+# Sets: 이것은 파이썬에서 집합을 표현
+# <editor-fold desc="집합">
 s = set()
 s.add(1)
 s.add(2)
 s.add(2)    # 이미 앞에서 2를 넣었기 때문에 집합개념인 s는 원소 갯수는 변하지 않는다
 print(s)
+
 
 x = len(s)  # 2
 print(x)
@@ -323,6 +333,7 @@ print(y)    # TRUE
 
 z = 3 in s
 print(z)    # FALSE
+# </editor-fold>
 
 # List보다 Set에서 in으로 원소를 찾는 것이 훨씬 빠르다
 stopwords_list = ["a","an","at"] + hundreds_of_other_words + ["yet", "you"]
@@ -607,5 +618,7 @@ print (ss.contains(4))
 ss.remove(3)
 print (ss.contains(3))
 # </editor-fold>
+
+# 함수형 도구
 
 
