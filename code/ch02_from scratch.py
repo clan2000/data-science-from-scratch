@@ -620,5 +620,16 @@ print (ss.contains(3))
 # </editor-fold>
 
 # 함수형 도구
+# <editor-fold desc="하나의 함수를 만들고 그것 일부를 끝어다 쓸수는 있지만">
+def exp(base, power):
+    return base ** power
 
+def two_to_the(power)
+    return exp(2, power)
+# </editor-fold>
 
+from functools import partial
+two_to_the = partial(exp, 2)
+print two_to_the(3)
+
+# is now a function of one variable # 8

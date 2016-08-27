@@ -23,6 +23,7 @@ def make_simple_line_chart():
     plt.ylabel("Billions of $")
     plt.show()
 
+make_simple_line_chart()
 
 def make_simple_bar_chart():
     """ 그림 3-2. 간단한 막대 그래프 """
