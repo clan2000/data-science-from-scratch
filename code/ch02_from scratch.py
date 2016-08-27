@@ -620,5 +620,32 @@ print (ss.contains(3))
 # </editor-fold>
 
 # 함수형 도구
+# <editor-fold desc="하나의 함수를 만들고 그것 일부를 끝어다 쓸수는 있지만">
+def exp(base, power):
+    return base ** power
+
+def two_to_the(power):              # 2 - base - 의 power 승
+    return exp(2, power)
+# </editor-fold>
+
+# <editor-fold desc="partial 함수 사용으로 더 손쉽게 쓸 수 있다">
+from functools import partial
+two_to_the = partial(exp, 2)        # is now a function of one variable
+print (two_to_the(3))               # 8, 2의 exp 승
+
+square_of = partial(exp, power=2)   # partial은 함수 인자를 지정하는 새로운 함수를 만든다
+print (square_of(3))                  # 9
+# </editor-fold>
+
+def double(x):
+    return 2 * x
+
+xs = [1, 2, 3, 4]
+twice_xs1 = [double(x) for x in xs]         # [2, 4, 6, 8] # same as above
+twice_xs2 = map(double, xs)                 # *function* that doubles a list
+
+list_doubler = partial(map, double)         # partial은 map함수 안에 double을 넣은 새로운 함수를 만든다
+twice_xs = list_doubler(xs)
 
 
+# again [2, 4, 6, 8]
