@@ -265,6 +265,7 @@ for word in document:
 
 # defaultdict 활용하는 방법
 
+# <editor-fold desc="해당 키값이 없는 경우 만들어 준다">
 from collections import defaultdict
 word_counts = defaultdict(int)  # int() produces 0 , Defaultdict 형태의 함수로 만든다
 for word in document:
@@ -291,29 +292,38 @@ from collections import defaultdict
 dd_pair = defaultdict(lambda: [0, 0])
 dd_pair[2][1] = 1               # 이부분은 알수 없다
 print(dd_pair)                  # defaultdict(<function <lambda> at 0x105acc510>, {2: [0, 1]})
+# </editor-fold>
 
 # Counter
+# <editor-fold desc="히스토그램에 쓰임">
 from collections import Counter # key에 빈도값을 연결하여 히스토그램등에 쓰임
 c = Counter([0, 1, 2, 0]) # c is (basically) { 0 : 2, 1 : 1, 2 : 1 }
 print(c)
+# </editor-fold>
 
 # 이것 한줄로 단어 카운트 해결
+# <editor-fold desc="단어 세기">
+document = "This is a first sentence for Python self study"
 word_counts = Counter(document)
 print(document)     # This is a first sentence for Python self study
-print(word_counts)  #
+print(word_counts)
+# </editor-fold>
 
 # print the 10 most common words and their counts
+word = "wolf fox bear cat dogs eagle"
 from collections import Counter
 print (word, count)
 for word, count in word_counts.most_common(10):     # most_common(10)
     pass
 
-# Sets
+# Sets: 이것은 파이썬에서 집합을 표현
+# <editor-fold desc="집합">
 s = set()
 s.add(1)
 s.add(2)
 s.add(2)    # 이미 앞에서 2를 넣었기 때문에 집합개념인 s는 원소 갯수는 변하지 않는다
 print(s)
+
 
 x = len(s)  # 2
 print(x)
@@ -323,6 +333,7 @@ print(y)    # TRUE
 
 z = 3 in s
 print(z)    # FALSE
+# </editor-fold>
 
 # List보다 Set에서 in으로 원소를 찾는 것이 훨씬 빠르다
 stopwords_list = ["a","an","at"] + hundreds_of_other_words + ["yet", "you"]
@@ -370,12 +381,14 @@ for x in range(10):
     print(x)        # This will print 0, 1, 2, and 4.
 
 # 불리언 연산자
+# <editor-fold desc="is 연산자">
 one_is_less_than_two = 1 < 2 # equals True
 true_equals_false = True == False # T가 F와 같다면 Ture
 
 x = None        # 파이썬은  null을 None으로 표기
 print x == None # prints True, 파이썬스럽지 않다
 print x is None # prints True, 파이썬스럽다
+# </editor-fold>
 
 # 아래 값은 모두 False다
 False
@@ -493,9 +506,10 @@ print(lazy_evens_below_20)
 # </editor-fold>
 
 # 난수의 생성
+# <editor-fold desc="난수 기본 및 영역 설정">
 import random
 four_uniform_randoms = [random.random() for _ in range(4)]
-four_uniform_randoms        # 난수 4개의 List를 보여줌
+print(four_uniform_randoms)       # 난수 4개의 List를 보여줌
 
 random.seed(10)             # seed 를 고정
 print (random.random())     # 0.57140259469
@@ -508,8 +522,114 @@ print (random.random())     # 0.4523795535098186
 
 print(random.randrange(10))        # 정수로 영역 지정, 끝점은 제외 range(10) = [0, 1, ..., 9]
 print(random.randrange(3, 6))      # 정수로 영역 지정, 끝점은 제외 range(3, 6) = [3, 4, 5]
+# </editor-fold>
 
-up_to_ten = range[10]
-reorder = random.shuffle(up_to_ten)   # shuffle은 리스트의 순서를 임의로 바꾸어 준다.
-print (reorder)
-# [2, 5, 1, 9, 7, 3, 8, 6, 4, 0] (your results will probably be different)
+# 난수의 순서 바꾸기
+# <editor-fold desc="radom.shuffle 사용법">
+up_to_ten = range(10)
+print(up_to_ten)
+
+l_utt = list(up_to_ten)
+# In python3 range is a generator object - it does not return a list.
+# Convert it to a list before shuffling.
+print(l_utt)
+
+random.shuffle(l_utt)
+print (l_utt)    # shuffle은 리스트의 순서를 임의로 바꾸어 준다.
+# </editor-fold>
+
+# choice함수 쓰기와 list로 변환
+# <editor-fold desc="random.sample">
+my_best_friend = random.choice(["Alice", "Bob", "Charlie"]) # "Bob" for me
+print(my_best_friend)
+
+lottery_numbers = range(60)
+print((lottery_numbers))
+
+l_n = list(lottery_numbers)             # 먼저 리스트로 바꾸고
+print(l_n)
+
+winning_numbers = random.sample(l_n, 6) # [16, 36, 10, 6, 25, 9]
+print(winning_numbers)
+# </editor-fold>
+
+# 무엇인가 반복을 할때 for _ in range (n)  사용
+# <editor-fold desc="">
+four_with_replacement = [random.choice(range(10)) for _ in range(4)]
+print(four_with_replacement)
+# </editor-fold>
+
+# 정규 표현식
+# <editor-fold desc="re.match search split sub">
+import re
+
+print ([
+    not re.match("a", "cat"),                   # 시작에 없으므로 F --> T
+    re.search("a", "cat"),                      # cat 중에 a 존재
+    not re.search("c", "dog"),                  # dog 중에 ㅊ 없음
+    3 == len(re.split("[ab]", "carbs")),        # c,r,s,가 생성되어 길이가 3
+    "R-D-" == re.sub("[0-9]", "-", "R2D2")      # 숫자를 -로 대체
+])
+# </editor-fold>
+
+# 객체 지향 프로그래밍
+# <editor-fold desc="class __init__ __repr__ ">
+# by convention, we give classes PascalCase names
+class Set:
+        # these are the member functions
+        # 첫번째 인자는 관례적으로  "self"
+        # that refers to the particular Set object being used
+
+    def __init__(self, values = None):
+        # This is the constructor.
+        # Set을 만들때 아래 와 같이 초기화 된다
+        # 이렇게 사용할수 있다
+        # s1 = Set()                 empty set
+        # s2 = Set([1,2,2,3])        초기값이 주어진 셋
+        self.dict = {}                  # 이 set의 모든 instance는 자체적으로 dict을 유지
+                                        # 아 dict을 통해 항목의 존재여부를 파악
+        if values is not None:
+            for value in values:
+                self.add(value)
+
+    def __repr__(self):
+        # 프롬프트에서 이 함수를 입려거나 str()로 보내주면 set 객체를 문자열로 표현해 줌
+        return "Set: " + str(self.dict.keys())
+
+        # value를 받아서 Set dict 객체에 해당 value를 추가
+    def add(self, value):
+        self.dict[value] = True
+
+        # value를 받아서 해당 Set Dict 객체에 있으며 True를 반환
+    def contains(self, value):
+        return value in self.dict
+
+        # value를 받아서 해당 Set Dict에서 value를 삭제
+    def remove(self, value):
+            del self.dict[value]
+
+
+ss = Set([1,2,3])        # s를 객체로 표현
+ss.add(4)
+print(ss)
+
+print (ss.contains(4))
+
+ss.remove(3)
+print (ss.contains(3))
+# </editor-fold>
+
+# 함수형 도구
+# <editor-fold desc="하나의 함수를 만들고 그것 일부를 끝어다 쓸수는 있지만">
+def exp(base, power):
+    return base ** power
+
+def two_to_the(power)
+    return exp(2, power)
+# </editor-fold>
+
+from functools import partial
+two_to_the = partial(exp, 2)
+print two_to_the(3)
+
+# is now a function of one variable # 8
