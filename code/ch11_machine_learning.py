@@ -6,12 +6,28 @@ import math, random
 # data splitting
 #
 
+data1 = {
+        "정인원": [90, "Y"],
+        "정동일": [100,"Y"],
+        "고미원": [90, "Y"],
+        "정상일": [88, "N"],
+        "정인미": [83, "N"],
+        "정동상": [67, "N"],
+        "정우원": [93, "Y"],
+        "정조일": [99, "Y"]
+}
+
+print(data1)
+
 def split_data(data, prob):
     """split data into fractions [prob, 1 - prob]"""
     results = [], []
     for row in data:
-        results[0 if random.random() < prob else 1].append(row)
+        results[0 if random.random() < prob else 1].append(row)     #
     return results
+
+print(split_data(data1, 0.1))
+
 
 def train_test_split(x, y, test_pct):
     data = zip(x, y)                              # pair corresponding values  
@@ -43,8 +59,8 @@ def f1_score(tp, fp, fn, tn):
 
 if __name__ == "__main__":
 
-    print "accuracy(70, 4930, 13930, 981070)", accuracy(70, 4930, 13930, 981070)
-    print "precision(70, 4930, 13930, 981070)", precision(70, 4930, 13930, 981070)
-    print "recall(70, 4930, 13930, 981070)", recall(70, 4930, 13930, 981070)
-    print "f1_score(70, 4930, 13930, 981070)", f1_score(70, 4930, 13930, 981070)
+    print ("accuracy(70, 4930, 13930, 981070)", accuracy(70, 4930, 13930, 981070))
+    print ("precision(70, 4930, 13930, 981070)", precision(70, 4930, 13930, 981070))
+    print ("recall(70, 4930, 13930, 981070)", recall(70, 4930, 13930, 981070))
+    print ("f1_score(70, 4930, 13930, 981070)", f1_score(70, 4930, 13930, 981070))
 
