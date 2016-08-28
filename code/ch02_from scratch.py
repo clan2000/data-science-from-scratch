@@ -620,6 +620,7 @@ print (ss.contains(3))
 # </editor-fold>
 
 # 함수형 도구
+
 # <editor-fold desc="하나의 함수를 만들고 그것 일부를 끝어다 쓸수는 있지만">
 def exp(base, power):
     return base ** power
@@ -637,15 +638,168 @@ square_of = partial(exp, power=2)   # partial은 함수 인자를 지정하는 �
 print (square_of(3))                  # 9
 # </editor-fold>
 
+# <editor-fold desc="map함수로 하나의 함수에 인자를 개별적으로 넣을 수도 있고">
 def double(x):
     return 2 * x
 
 xs = [1, 2, 3, 4]
-twice_xs1 = [double(x) for x in xs]         # [2, 4, 6, 8] # same as above
-twice_xs2 = map(double, xs)                 # *function* that doubles a list
+twice_xs1 = [double(x) for x in xs]         # [2, 4, 6, 8]
+twice_xs2 = list(map(double, xs))           # list xs의 각 요소에 대해 double 을 실행
+                                            # 파이썬 3에서는 map의 결과를 list로 변환 해야 한다
+twice_xs3 = double (xs)                     # List * 2 = List + List
 
-list_doubler = partial(map, double)         # partial은 map함수 안에 double을 넣은 새로운 함수를 만든다
-twice_xs = list_doubler(xs)
+print(twice_xs1)
+print(twice_xs2)
+print(twice_xs3)
+# </editor-fold>
+
+# <editor-fold desc="partial 함수로 어떤 함수를 다른 함수인의 인자에게 map하는 함수를 만들수도 있다">
+list_doubler = partial(map, double)         # partial 은 map 함수 안에 double을 넣은 새로운 함수를 만든다
+twice_xs = list_doubler(xs)                 # again [2, 4, 6, 8]
+print(list(twice_xs))                       # list형으로 변환해 주어야 한다
+# </editor-fold>
+
+# <editor-fold desc="인자가 여러개인 함수에도 map 적용이 가능">
+def multiply(x, y):
+    return x * y
+
+products = list(map(multiply, [1, 2], [4, 5]))  # [1 * 4, 2 * 5] = [4, 10]
+print(products)                                 # [x,x,x],[y,y,y]
+
+products = list(map(multiply, [1, 2] ))  #  이 것은 에러
+print(products)
+
+# </editor-fold>
+
+# <editor-fold desc="for in if 사용법">
+def is_even(x):                             # 짝수이면 0
+    return x % 2 == 0
+
+x_evens = [x for x in xs if is_even(x)]     # {1,2,3,4] 중 짝수인 것만 넘김  [2,4]
+print(list(x_evens))
+# </editor-fold>
+
+# <editor-fold desc="filter로 다른 함수를 사용하기와 partial로 필터와 다른 함수 결합하기">
+x_evens = filter(is_even, xs)               # xs에 대해 is_even을 필터로 사용
+print(list(x_evens))
+
+list_evener = partial(filter, is_even)      # us_even을 filter로 사용하는 함수를 partial로 만듦
+x_evens = list_evener(xs)
+# </editor-fold>
+
+# <editor-fold desc="reduce는 list의 모든 항목을 합쳐주면서 하나의 값으로 만들어 준다">
+from functools import partial
+from functools import reduce                # 파이썬 3에서는 import 필요
+
+xs = [1,2,3,4]
+x_product = reduce (multiply, xs)             # = 1 * 2 * 3 * 4 = 24
+print(x_product)
+
+list_product = partial (reduce, multiply)    # *function* that reduces a list
+
+x_product = list_product(xs)                # again = 24
+print(x_product)
+# </editor-fold>
 
 
-# again [2, 4, 6, 8]
+# enumerate
+
+# <editor-fold desc="파이썬 스럽지 않은 방법">
+documents ="This is a second sentence for python self study"
+for i in range(len(documents)):
+    document = documents[i]
+    print(i, document )
+
+# also not Pythonic
+i=0
+for document in documents:
+    print(i, document)
+    i += 1
+# </editor-fold>
+# <editor-fold desc="enumerate는 인덱스, 항목을 tuple로 생성해 준다">
+for i, document in enumerate(documents):    # enumerate는 인덱스, 항목을 tuple로 생성해 준다
+    print(i, document)
+
+for i in range(len(documents)):             # 안댁스만 필요한 경우, 파이썬 스럽지 않다
+    print(i)
+
+for i, _ in enumerate(documents):           # enumerate로 문자 갯수만 뽑는다
+    print(i)
+# </editor-fold>
+
+# zip, argument unpacking
+# <editor-fold desc="복수 list의 인자간 결합 또는 해체">
+list1 = ['a', 'b', 'c']
+list2 = [1, 2, 3]
+zz = zip(list1, list2)          # is [('a', 1), ('b', 2), ('c', 3)]
+print(list(zz))                 # list로 바꾸어서 출력
+
+pairs = [('a', 1), ('b', 2), ('c', 3)]
+letters, numbers = zip(*pairs)  # *인자를 해체할때 사용한다
+
+def add(a, b):
+    return a + b
+add(1, 2)                       # 3
+add([1, 2])                     # 인자가 1개이므로 에러
+add(*[1, 2])                    # 풀어서 2개이므로 3
+# </editor-fold>
+
+
+# args와 kwargs
+
+# <editor-fold desc="doubler함수는 다른 함수를 인자로 받아서 그 결과값을 2배로 해주는 고차 함수">
+def doubler(f):
+    def g(x):
+        return 2 * f(x)
+    return g
+
+def f1(x):
+    return x+1
+
+g = doubler(f1)
+
+print (g(3))        # 8 (== ( 3 + 1) * 2)
+print (g(-1))         # 0 (== (-1 + 1) * 2)
+# </editor-fold>
+
+# <editor-fold desc="doubler는 복수 인자의 함수에는 적용할 수 없다">
+def f2(x, y):
+    return x+y
+
+g = doubler(f2)
+print (g(1, 2)) # 이 방식은 2개 이상의 인자를 넘길때에는 쓸수 없다
+# </editor-fold>
+
+# <editor-fold desc="여러 개의 인자를 받아서 tuple과 dict로 나누어 사용할수 있다">
+def magic(*args, **kwargs):
+    print ("unnamed args:", args)           # 이름없은 인자 tuple
+    print ("keyword args:", kwargs)         # 이름있는 dict
+
+magic(1, 2, key="word", key2="word2")
+    # prints
+    #  unnamed args: (1, 2)
+    #  keyword args: {'key2': 'word2', 'key': 'word'}
+# </editor-fold>
+
+# <editor-fold desc="list와 dick을 해체하여 숫자 부분만 덧셈하는 것도 가능">
+def other_way_magic(x, y, z):
+    return x+y+z
+
+x_y_list = [1, 2]
+z_dict = {"z":3}
+print (other_way_magic(*x_y_list, **z_dict)) # 6
+# </editor-fold>
+
+# <editor-fold desc="d_c함수는 kk함수를 인자로 받 그 결과를 2배로 해준다  kk는 tuple, dict를 인자로 받는다 ">
+def f2(x, y):
+    return x+y
+
+def doubler_correct(kk):        # kk함수가 무엇을 인자로 받던 상관없다
+    def g(*args, **kwargs):     # 어떤 인자들이던 g로 넘어오면 , pass them through to kk
+        return 2 * kk(*args, **kwargs)
+    return g
+
+g = doubler_correct(f2)         # g는 f2의 결과 값을 2배로
+print (g(1, 2))                 # 6,  g의 인자가 2개여도 무관
+# </editor-fold>
+
