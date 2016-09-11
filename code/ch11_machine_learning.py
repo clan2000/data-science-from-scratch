@@ -6,16 +6,17 @@ import math, random
 # data splitting
 #
 
-data1 = {
-        "정인원": [90, "Y"],
-        "정동일": [100,"Y"],
-        "고미원": [90, "Y"],
-        "정상일": [88, "N"],
-        "정인미": [83, "N"],
-        "정동상": [67, "N"],
-        "정우원": [93, "Y"],
-        "정조일": [99, "Y"]
-}
+data1 = [ 80,
+          96,
+          43,
+          67,
+          89,
+          100,
+          99,
+          41,
+          89,
+          90
+          ]
 
 print(data1)
 
@@ -26,7 +27,7 @@ def split_data(data, prob):
         results[0 if random.random() < prob else 1].append(row)     #
     return results
 
-print(split_data(data1, 0.1))
+split_data(data1, 0.5)
 
 
 def train_test_split(x, y, test_pct):

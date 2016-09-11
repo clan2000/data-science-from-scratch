@@ -10,19 +10,40 @@ from functools import partial
 # functions for working with vectors
 #
 
+# <editor-fold desc="Zip ???">
+"""
+>>> list(zip([1, 2, 3], [4, 5, 6]))
+[(1, 4), (2, 5), (3, 6)]
+"""
+# </editor-fold>
+
+v = [ 1, 2, 3, 4]
+w = [10,20,30,40]
+
+# <editor-fold desc="?? ??? ??">
 def vector_add(v, w):
     """adds two vectors componentwise"""
     return [v_i + w_i for v_i, w_i in zip(v,w)]
+vector_add(v,w)
 
 def vector_subtract(v, w):
     """subtracts two vectors componentwise"""
     return [v_i - w_i for v_i, w_i in zip(v,w)]
+vector_subtract(w,v)
+# </editor-fold>
 
+from functools import reduce
 def vector_sum(vectors):
     return reduce(vector_add, vectors)
+vector_sum(v)
+vector_sum(w)
 
 def scalar_multiply(c, v):
     return [c * v_i for v_i in v]
+
+
+
+
 
 # this isn't right if you don't from __future__ import division
 def vector_mean(vectors):
